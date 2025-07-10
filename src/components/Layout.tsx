@@ -6,7 +6,7 @@
 // import { type SetStateAction, useState } from 'react';
 // import { Link, NavLink, Outlet } from 'react-router';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Layout, Grid, Drawer, Button, Menu, Typography } from 'antd';
 import { MenuOutlined, CloseOutlined } from '@ant-design/icons';
 import { NavLink, Outlet } from 'react-router';
