@@ -1,9 +1,4 @@
-import { ConfigProvider } from "antd";
-import viVN from "antd/es/locale/vi_VN";
-import React from "react";
-import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router";
-import App from "../App";
+import { createBrowserRouter } from "react-router";
 import Favorites from "../pages/Favorites";
 import Home from "../pages/Home";
 // import './index.css';

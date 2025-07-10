@@ -6,13 +6,13 @@
 // import { type SetStateAction, useState } from 'react';
 // import { Link, NavLink, Outlet } from 'react-router';
 
+import { CloseOutlined, MenuOutlined } from '@ant-design/icons';
+import { Button, Drawer, Grid, Layout, Menu, Typography } from 'antd';
 import { useState } from 'react';
-import { Layout, Grid, Drawer, Button, Menu, Typography } from 'antd';
-import { MenuOutlined, CloseOutlined } from '@ant-design/icons';
 import { NavLink, Outlet } from 'react-router';
 
 const { Header, Content, Footer } = Layout;
-const { Text, Link,Title } = Typography;   
+const { Link,Title } = Typography;   
 
 // const { Title } = Typography;
 

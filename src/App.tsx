@@ -1,10 +1,8 @@
-import { useState } from 'react'
-import { RouterProvider } from 'react-router'
-import './App.css'
-import { rootRouter } from './routers/root'
-import { ConfigProvider, Layout } from 'antd';
+import { ConfigProvider } from 'antd';
+import { RouterProvider } from 'react-router';
+import './App.css';
+import { rootRouter } from './routers/root';
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
