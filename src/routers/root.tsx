@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router";
-import Favorites from "../pages/Favorites";
 import Home from "../pages/Home";
 // import './index.css';
 import Layout from "../components/Layout";
+import Products from "../pages/Products";
 // import
 
 
@@ -20,9 +20,11 @@ export const rootRouter = createBrowserRouter([
             },
             {
                 path: "favorites",
-                element: <Favorites />,
+                element: <Products onlyFavorites={true} />,
             },
             {
+                path:"products",
+                element:<Products onlyFavorites={false} />
             }
         ]
     },

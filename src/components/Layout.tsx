@@ -145,6 +145,7 @@ const { Link,Title } = Typography;
 const menuItems = [
     { key: 'home', label: 'Home', to: '/' },
     { key: 'favorites', label: 'Favorites', to: '/favorites' },
+    { key: 'products', label: 'Our Products', to: '/products' },
     // add more if needed
 ];
 
@@ -218,7 +219,7 @@ export default function AppLayout() {
             {/* Main Content */}
             <Content className="flex-grow py-8 w-full bg-amber-500 mt-16">
                 {/* img can be addded in the bg here, with tinted color of choice */}
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="bg-white  shadow-lg p-6 md:p-8">
                         <Outlet />
                     </div>
@@ -226,7 +227,7 @@ export default function AppLayout() {
             </Content>
 
             {/* Footer */}
-            <Footer className="bg-green-700 text-white text-center fixed py-4 w-full flex justify-center bottom-0" >
+            <Footer className="bg-green-700 text-white text-center py-4 w-full flex justify-center bottom-0" >
                 © {new Date().getFullYear()} English Learning Co. All rights reserved.
             </Footer>
         </Layout>

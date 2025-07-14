@@ -48,7 +48,14 @@ function App() {
             // itemBg: '',
             colorBgBase: '',
           },
-          
+          Carousel: {
+            arrowSize: 40,
+            colorBgContainer: '#001529',
+            colorText: '#803050',
+            // arrowOffset: 400,
+            
+          },
+
         },
       }}>
 
