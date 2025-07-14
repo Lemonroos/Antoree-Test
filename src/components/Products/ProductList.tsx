@@ -50,12 +50,10 @@
 //     );
 // }
 
-import { useState } from 'react';
-import { Row, Col } from 'antd';
+import { Col, Row } from 'antd';
 import { motion, type Variants } from 'framer-motion';
-import ProductCard from './ProductCard';
-import ProductModal from '../Modals/ProductModal';
 import type { Product } from '../../types/Product';
+import ProductCard from './ProductCard';
 
 interface Props {
   products: Product[];
@@ -68,8 +66,8 @@ const listContainer: Variants = {
   show: { transition: { staggerChildren: 0.1 } },
 };
 
-export default function ProductList({ products, onUpdateProduct }: Props) {
-  const [selected, setSelected] = useState<Product | null>(null);
+export default function ProductList({ products, onClick, onUpdateProduct }: Props) {
+  // const [selected, setSelected] = useState<Product | null>(null);
 
   return (
     <>
@@ -77,14 +75,14 @@ export default function ProductList({ products, onUpdateProduct }: Props) {
         <Row gutter={[16, 16]}>
           {products.map((p) => (
             <Col key={p.id} xs={24} sm={12} lg={8}>
-              <ProductCard product={p} onClick={setSelected} onUpdate={onUpdateProduct} />
+              <ProductCard product={p} onClick={onClick} onUpdate={onUpdateProduct} />
             </Col>
           ))}
         </Row>
       </motion.div>
 
       {/* ✅ Pass selected as-is, no need for manual merging */}
-     
+
     </>
   );
 }
