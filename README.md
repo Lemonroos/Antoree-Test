@@ -76,28 +76,6 @@ npm run preview
 
 The build generates a `dist/` folder, and preview runs a local static server.
 
-## 📁 Project Basic Structure
-
-```
-src/
-├── assets/             # Images, logos, illustrations
-├── components/
-│   ├── Home/           # Home page sections
-│   ├── Products/       # Card, List, Modal, Suggestion, Filter
-│   └── Error/          # Error components
-├── contexts/           # React contexts (NotificationContext)
-├── pages/
-│   ├── Home.tsx
-│   └── Products.tsx    # Shared for Products & Favorites
-├── routers/            # Route definitions
-├── services/
-│   └── AI.ts           # OpenRouter.ai integration
-├── types/              # TypeScript type definitions
-├── utils/              # localStorage helpers, utilities
-├── animations/         # Framer Motion variants
-└── App.tsx
-```
-
 ## 🤖 AI Recommendations
 
 The AI suggestion system sends POST requests to `https://openrouter.ai/api/v1/chat/completions`:
