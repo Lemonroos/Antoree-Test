@@ -1,6 +1,7 @@
 import { Button, Typography } from 'antd';
 import { motion } from 'framer-motion';
 import { heroVariants } from '../../animations/VariantContext';
+import { Link } from 'react-router';
 
 const { Title, Paragraph } = Typography;
 
@@ -44,9 +45,11 @@ export default function HeroSection() {
             variants={heroVariants}
             className="mt-6 flex flex-wrap gap-4"
           >
-            <Button size="large" type="primary" className="shadow-lg" href='/products'>
-              Start Now
-            </Button>
+            <Link to="/products">
+              <Button size="large" type="primary" className="shadow-lg" >
+                Start Now
+              </Button>
+            </Link>
 
           </motion.div>
         </div>
