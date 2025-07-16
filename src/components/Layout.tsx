@@ -37,7 +37,7 @@ export default function AppLayout() {
 
     return (
         <Layout className="min-h-screen flex flex-col">
-            <Header className="fixed top-0 left-0 right-0 bottom-0 z-20 p-4 my-1 sm:px-8 flex items-center justify-between  shadow ">
+            <Header className="fixed top-0 left-0 right-0 bottom-0 z-20 p-4 sm:px-8 flex items-center justify-between  shadow ">
                 <NavLink to="/" className=" ">
                     <Title level={3} style={{ color: '#16a34a', padding: '0' }}>
                         ENGLISH
