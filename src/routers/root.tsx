@@ -1,9 +1,8 @@
 import { createBrowserRouter } from "react-router";
 import Home from "../pages/Home";
-// import './index.css';
+import Error from "../pages/Error";
 import Layout from "../components/Layout";
 import Products from "../pages/Products";
-// import
 
 
 
@@ -12,32 +11,24 @@ export const rootRouter = createBrowserRouter([
     {
         path: "/",
         element: <Layout />,
-        // errorElement: <ErrorPage />,
+        errorElement: <Error />,
         children: [
             {
                 index: true,
                 element: <Home />,
+                errorElement: <Error />,
             },
             {
                 path: "favorites",
                 element: <Products onlyFavorites={true} />,
+                errorElement: <Error />,
+
             },
             {
-                path:"products",
-                element:<Products onlyFavorites={false} />
+                path: "products",
+                element: <Products onlyFavorites={false} />,
+                errorElement: <Error />,
             }
         ]
     },
-    // {
-    //     path: "/favorites",
-    //     element: <Favorites />,
-    // }
 ], {})
-
-// createRoot(document.getElementById('root')!).render(
-//     <React.StrictMode>
-//         <ConfigProvider locale={viVN}>
-//             <RouterProvider router={router} />
-//         </ConfigProvider>
-//     </React.StrictMode>
-// )

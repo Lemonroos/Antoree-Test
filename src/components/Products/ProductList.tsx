@@ -1,79 +1,71 @@
-// import { useState } from 'react';
-// import { Row, Col } from 'antd';
-// import { motion, type Variants } from 'framer-motion';
-// import ProductCard from './ProductCard';
-// import ProductModal from '../Modals/ProductModal';
-
-// import type { Product } from '../../types/Product';
-
-// interface Props {
-//     products: Product[];
-//     // onToggleFavorite: (id: string, newState: boolean) => void;
-//   }
-
-
-// const listContainer: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
-
-// export default function ProductList({ products }: Props) {
-//     const [selected, setSelected] = useState<Product | null>(null);
-
-
-
-//     return (
-//         <>
-//             <motion.div initial="hidden" animate="show" variants={listContainer}>
-//                 <Row gutter={[16, 16]}>
-//                     {products.map(p => (
-//                         <Col key={p.id} xs={24} sm={12} lg={8}>
-//                             <ProductCard
-//                                 product={p}
-//                                 onClick={setSelected}
-//                                 // onToggleFavorite={onToggleFavorite}
-//                             />
-//                         </Col>
-//                     ))}
-//                 </Row>
-//             </motion.div>
-//             {/* <ProductModal visible={!!selected} product={selected || undefined} onClose={() => setSelected(null)} /> */}
-//             {/* <ProductModal
-//                 visible={!!selected}
-//                 product={selected ? { ...selected, longDescription: '', rating: 0, reviewsCount: 0 } : undefined}
-//                 onClose={() => setSelected(null)}
-//             /> */}
-//             <ProductModal
-//                 visible={!!selected}
-//                 product={selected ? { ...selected, title: selected.title, description: selected.description, rating: selected.rating, reviewsCount: selected.reviewsCount } : undefined}
-//                 onClose={() => setSelected(null)}
-//                 // onToggleFavorite={onToggleFavorite}
-//             />
-//         </>
-//     );
-// }
-
-import { Col, Row } from 'antd';
-import { motion, type Variants } from 'framer-motion';
+import { Col, Empty, Pagination, Row, Spin } from 'antd';
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { sectionVariants } from '../../animations/VariantContext';
 import type { Product } from '../../types/Product';
 import ProductCard from './ProductCard';
 
 interface Props {
   products: Product[];
-  onClick: (product: Product) => void;
-  onUpdateProduct: (updated: Product) => void; // <- callback to update shared state
+  loading: boolean;
+  onClick: (p: Product) => void;
+  onUpdateProduct: (updated: Product) => void;
 }
 
-const listContainer: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
-};
 
-export default function ProductList({ products, onClick, onUpdateProduct }: Props) {
-  // const [selected, setSelected] = useState<Product | null>(null);
+export default function ProductListWithPagination({
+  products,
+  loading,
+  onClick,
+  onUpdateProduct,
+}: Props) {
+  const pageSize = 6;                // items per page
+  const [page, setPage] = useState(1);
+  const [visibleProducts, setVisibleProducts] = useState<Product[]>([]);
+
+  // reset to first page whenever products array changes
+  useEffect(() => {
+    setPage(1);
+  }, [products]);
+
+  // compute current page slice
+  useEffect(() => {
+    const start = (page - 1) * pageSize;
+    setVisibleProducts(products.slice(start, start + pageSize));
+  }, [page, products]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center py-12">
+        <Spin size="large" />
+      </div>
+    );
+  }
+
+  if (!loading && products.length === 0) {
+    return <Empty description="Không có sản phẩm nào" className="py-12" />;
+  }
 
   return (
     <>
-      <motion.div initial="hidden" animate="show" variants={listContainer}>
+      <motion.div
+        className="space-y-6"
+        viewport={{ once: true }}
+        initial="hidden"
+        animate="show"
+        variants={sectionVariants}
+      >
         <Row gutter={[16, 16]}>
-          {products.map((p) => (
+          {visibleProducts.map(p => (
+            // <Col key={p.id} xs={24} sm={12} lg={8}>
+            //   <motion.div >
+            //     <ProductCard
+            //       product={p}
+            //       onClick={onClick}
+            //       onUpdate={onUpdateProduct}
+            //     />
+            //   </motion.div>
+            // </Col>
             <Col key={p.id} xs={24} sm={12} lg={8}>
               <ProductCard product={p} onClick={onClick} onUpdate={onUpdateProduct} />
             </Col>
@@ -81,8 +73,15 @@ export default function ProductList({ products, onClick, onUpdateProduct }: Prop
         </Row>
       </motion.div>
 
-      {/* ✅ Pass selected as-is, no need for manual merging */}
-
+      <div className="flex justify-center py-6">
+        <Pagination
+          current={page}
+          pageSize={pageSize}
+          total={products.length}
+          onChange={p => setPage(p)}
+          showSizeChanger={false}
+        />
+      </div>
     </>
   );
 }

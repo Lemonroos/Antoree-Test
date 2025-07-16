@@ -1,62 +1,123 @@
-// import { Carousel } from 'antd';
-
-// export default function TestimonialsSection() {
-//   return (
-//     <section className="bg-green-50 py-16 section-testimonials">
-//       <div className="container mx-auto">
-//         <h2 className="text-2xl font-semibold mb-6 text-center">What Our Students Say</h2>
-//         <Carousel autoplay dotPosition="bottom">
-//           {[1,2,3].map(i => (
-//             <div key={i} className="px-8">
-//               <div className="bg-white p-8 rounded-lg shadow mx-auto max-w-xl">
-//                 <p className="italic mb-4">
-//                   “This course changed the way I learn languages. Highly recommend!”
-//                 </p>
-//                 <div className="font-bold">User {i}</div>
-//                 <div className="text-sm text-gray-600">⭐⭐⭐⭐⭐</div>
-//               </div>
-//             </div>
-//           ))}
-//         </Carousel>
-//       </div>
-//     </section>
-//   );
-// }
-
-
-// import React from 'react';
-import { Carousel } from 'antd';
+import { Carousel, Card, Col, Rate, Row, Typography, Grid } from 'antd';
 import { motion } from 'framer-motion';
+import { sectionVariants } from '../../animations/VariantContext';
+
+const { Title, Text, Paragraph } = Typography;
+const { useBreakpoint } = Grid;
+
+interface Review {
+  id: number;
+  name: string;
+  avatar: string;
+  rating: number;
+  comment: string;
+}
+
+// Dữ liệu mẫu
+const reviews: Review[] = [
+  {
+    id: 1,
+    name: 'Alice Nguyen',
+    avatar: 'https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/3.jpg',
+    rating: 5,
+    comment: 'Khóa học rất chất lượng, giảng viên nhiệt tình và phương pháp dễ hiểu.',
+  },
+  {
+    id: 2,
+    name: 'Cindy Pham',
+    avatar: 'https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/12.jpg',
+    rating: 5,
+    comment: 'Môi trường học thoải mái, bài tập phong phú, đáng đồng tiền bát gạo!',
+  },
+];
 
 export default function ReviewSection() {
+  const screens = useBreakpoint();
+
+  const content = (
+    <Row gutter={[24, 24]} justify="center">
+      {reviews.map((r) => (
+        <Col key={r.id} xs={24} sm={12} md={8}>
+          <motion.div
+            // className="space-y-6"
+            initial="hidden"
+            whileInView="showUp"
+            viewport={{ once: true }}
+            variants={sectionVariants}
+          >
+            <Card
+              hoverable
+              className="shadow-sm rounded-lg overflow-hidden"
+            >
+              <div className="flex items-center mb-4">
+                <img
+                  src={r.avatar}
+                  alt={r.name}
+                  className="w-12 h-12 rounded-full mr-4 object-cover"
+                />
+                <div>
+                  <Text strong>{r.name}</Text>
+                  <div><Rate disabled defaultValue={r.rating} /></div>
+                </div>
+              </div>
+              <Paragraph className="text-gray-600 mb-0 line-clamp-3">
+                “{r.comment}”
+              </Paragraph>
+            </Card>
+          </motion.div>
+        </Col>
+      ))}
+    </Row>
+  );
+
   return (
     <motion.section
-      className="bg-green-50 py-16 section-testimonials"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
+      className="section-testimonials bg-green-50 py-16"
+      initial="hidden"
+      whileInView="showUp"
       viewport={{ once: true }}
-      transition={{ duration: 0.8 }}
+      variants={sectionVariants}
     >
-      <div className="container mx-auto">
-        <h2 className="text-2xl font-semibold mb-6 text-center">What Our Students Say</h2>
-        <Carousel autoplay dotPosition="bottom" arrows dots={true}>
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="px-8">
-              <motion.div
-                className="bg-white p-8 rounded-lg shadow mx-auto max-w-xl"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.2 * i }}
-              >
-                <p className="italic mb-4">
-                  “This course changed the way I learn languages. Highly recommend!”
-                </p>
-                <div className="font-bold">User {i}</div>
-                <div className="text-sm text-gray-600">⭐⭐⭐⭐⭐</div>
-              </motion.div>
-            </div>
-          ))}
-        </Carousel>
+      <div className="container mx-auto px-4">
+        <Title level={2} className="text-center mb-8">
+          What Our Students Say
+        </Title>
+
+        {screens.md ? (
+          content
+        ) : (
+          <Carousel
+            autoplay
+            dots
+            arrows={false}
+            dotPosition="bottom"
+            className="px-4"
+          >
+            {reviews.map((r) => (
+              <div key={r.id} className="px-2">
+                <Card
+                  hoverable
+                  className="mx-auto shadow-sm rounded-lg overflow-hidden"
+                  style={{ maxWidth: 300 }}                >
+                  <div className="flex items-center mb-4">
+                    <img
+                      src={r.avatar}
+                      alt={r.name}
+                      className="w-12 h-12 rounded-full mr-4 object-cover"
+                    />
+                    <div>
+                      <Text strong>{r.name}</Text>
+                      <div><Rate disabled defaultValue={r.rating} /></div>
+                    </div>
+                  </div>
+                  <Paragraph className="text-gray-600 mb-0">
+                    “{r.comment}”
+                  </Paragraph>
+                </Card>
+              </div>
+            ))}
+          </Carousel>
+        )}
       </div>
     </motion.section>
   );

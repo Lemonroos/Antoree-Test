@@ -6,15 +6,16 @@ export const pageVariants: Variants = {
     show: {
         opacity: 1,
         transition: {
-          when: 'beforeChildren',
-          staggerChildren: 0.2,     // tự động delay các section
+            when: 'beforeChildren',
+            staggerChildren: 0.2,     // tự động delay các section
         }
-      },
+        
+    },
     exit: { opacity: 0, transition: { duration: 4 } }
 };
 
 export const sectionVariants: Variants = {
-    hidden: { opacity: 0,transition: { duration: 0 } },
+    hidden: { opacity: 0, transition: { duration: 0 } },
     // delay: { transition:{delay: delay}},
     show: {
         opacity: 1, transition: {
@@ -39,4 +40,31 @@ export const sectionVariants: Variants = {
 
         }
     },
+};
+
+
+export const heroVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    show: (i) => ({
+        opacity: 1,
+        y: 0,
+        transition: { delay: 0.2 * i, duration: 0.8 }
+    })
+};
+
+export const colVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    show: i => ({
+        opacity: 1, y: 0,
+        transition: { delay: i * 0.15, duration: 0.6, ease: 'easeOut' }
+    })
+};
+
+
+export const rowVariants: Variants = {
+    hidden: { opacity: 0, x: -30 },
+    show: i => ({
+        opacity: 1, y: 0,
+        transition: { delay: i * 0.15, duration: 0.6, ease: 'easeOut' }
+    })
 };

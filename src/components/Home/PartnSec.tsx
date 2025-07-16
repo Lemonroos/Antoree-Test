@@ -1,56 +1,49 @@
-
-// const partners = ['logo1','logo2','logo3','logo4'];
-
-// export default function PartnersSection() {
-//   return (
-//     <section className="py-16 section-partners">
-//       <div className="container mx-auto text-center">
-//         <h2 className="text-2xl font-semibold mb-8">Trusted By</h2>
-//         <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 items-center">
-//           {partners.map((logo, i) => (
-//             <img key={i} src={`/${logo}.png`} alt={`Partner ${i}`} className="mx-auto h-12" />
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-
-
-
-// import React from 'react';
+import { Col, Row, Typography } from 'antd';
 import { motion } from 'framer-motion';
-import { sectionVariants } from '../../animations/FrameMotVariants';
+import { colVariants, sectionVariants } from '../../animations/VariantContext';
 
-const partners = ['logo1', 'logo2', 'logo3', 'logo4'];
+const { Title } = Typography;
+
+
+const partners = [
+  '/partners/logo1.png',
+  '/partners/logo2.png',
+  '/partners/logo3.png',
+  '/partners/logo4.png',
+  '/partners/logo5.png',
+  '/partners/logo6.png',
+];
 
 export default function PartnersSection() {
   return (
     <motion.section
-      className="py-16 section-partners"
-      initial={'hidden'}
-      whileInView={'showUp'}
-      viewport={{ once: false }}
+      className="section-partners py-6"
+      initial="hidden"
+      whileInView="showUp"
+      viewport={{ once: true }}
       variants={sectionVariants}
-      
-    //   viewport={{ once: true }}
     >
-      <div className="container mx-auto text-center">
-        <h2 className="text-2xl font-semibold mb-8">Trusted By</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 items-center">
-          {partners.map((logo, i) => (
-            <motion.img
-              key={i}
-              src={`/${logo}.png`}
-              alt={`Partner ${i}`}
-              className="mx-auto h-12 filter grayscale hover:grayscale-0 transition-filter"
-              initial={{ scale: 0.8, opacity: 0 }}
-              viewport={{ once: true }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.2 * i }}
-            />
+      <div className="container mx-auto px-4 text-center">
+        <Title level={3} className="mb-10">Trusted By</Title>
+
+        <Row gutter={[24, 24]} justify="center" align="middle">
+          {partners.map((src, idx) => (
+            <Col key={idx} xs={12} sm={8} md={6} lg={4}>
+              <motion.div
+                className="flex justify-center"
+                custom={idx} initial="hidden"  viewport={{ once: true }} variants={colVariants} whileInView="show"
+              >
+
+                <img
+                  src={src}
+                  alt={`Partner ${idx + 1}`}
+                  className="h-16 object-contain filter grayscale hover:filter-none transition-all duration-300"
+                />
+
+              </motion.div>
+            </Col>
           ))}
-        </div>
+        </Row>
       </div>
     </motion.section>
   );

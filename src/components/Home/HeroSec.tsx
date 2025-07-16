@@ -1,81 +1,71 @@
-// import { Button } from 'antd';
+import { Button, Typography } from 'antd';
+import { motion } from 'framer-motion';
+import { heroVariants } from '../../animations/VariantContext';
 
-// export default function HeroSection() {
-//   return (
-//     <section className="relative bg-green-600 text-white py-20 section-hero">
-//       <div className="container mx-auto flex flex-col-reverse md:flex-row items-center">
-//         <div className="md:w-1/2 text-center md:text-left">
-//           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-//             Learn Languages, Anywhere
-//           </h1>
-//           <p className="mb-6 text-lg">
-//             Join thousands of learners and start speaking today.
-//           </p>
-//           <Button size="large" type="primary" className="bg-white text-green-600 hover:bg-green-50">
-//             Start Now
-//           </Button>
-//         </div>
-//         <div className="md:w-1/2 mb-8 md:mb-0">
-//           <img src="/hero-illustration.svg" alt="Hero" className="w-full" />
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
+const { Title, Paragraph } = Typography;
 
 
-// [⚠️ Suspicious Content] import React from 'react';
-import { Button } from 'antd';
-import { motion, useReducedMotion } from 'framer-motion';
-import { sectionVariants } from '../../animations/FrameMotVariants';
-// import type{Variants} from "framer-motion"  ;
 export default function HeroSection() {
-  const reduce = useReducedMotion();
-  console.log(reduce);
+
   return (
-    <motion.section
-      className="relative bg-green-600 text-white py-20 section-hero"
-      initial={'hidden'}
-      whileInView={'showUp'}
-      viewport={{ once: true }}
-      variants={sectionVariants}
-    >
-      <div className="container mx-auto flex flex-col-reverse md:flex-row items-center">
-        <div className="md:w-1/2 text-center md:text-left">
-          <motion.h1
-            className="text-4xl md:text-5xl font-bold mb-4"
-            animate={'showLeft'}
-            variants={sectionVariants}
-          >
-            Learn Languages, Anywhere
-          </motion.h1>
-          <motion.p
-            className="mb-6 text-lg"
-            initial={'hidden'}
-            animate={'showLeft'}
-            variants={sectionVariants}
-          >
-            Join thousands of learners and start speaking today.
-          </motion.p>
+    <section className="relative overflow-hidden px-10 text-white bg-gray-50">
+
+      <div className="relative container mx-auto px-4 py-0 flex flex-col-reverse md:flex-row items-center ">
+        <div className="w-full md:w-1/2 py-4">
           <motion.div
-            initial={'hidden'}
-            animate={'showLeft'}
-            variants={sectionVariants}
+            custom={1}
+            initial="hidden"
+            animate="show"
+            viewport={{ once: true }}
+            variants={heroVariants}
           >
-            <Button size="large" type="primary" className="bg-white text-green-600 hover:bg-green-50">
+            <Title className="text-3xl sm:text-4xl lg:text-5xl font-extrabold  " style={{ color: '#16a34a' }}>
+              Learn Languages,<br /> Anywhere, Anytime
+            </Title>
+          </motion.div>
+
+          <motion.div
+            custom={2}
+            initial="hidden"
+            animate="show"
+            viewport={{ once: true }}
+            variants={heroVariants}
+          >
+            <Paragraph className="mt-4 text-lg sm:text-xl max-w-md">
+              Join thousands of learners worldwide. Interactive lessons, live sessions, and personalized AI recommendations to boost your fluency.
+            </Paragraph>
+          </motion.div>
+
+          <motion.div
+            custom={3}
+            initial="hidden"
+            animate="show"
+            viewport={{ once: true }}
+            variants={heroVariants}
+            className="mt-6 flex flex-wrap gap-4"
+          >
+            <Button size="large" type="primary" className="shadow-lg" href='/products'>
               Start Now
             </Button>
+
           </motion.div>
         </div>
+
         <motion.div
-          className="md:w-1/2 mb-8 md:mb-0"
-          initial={'hidden'}
-          animate={'showRight'}
-          variants={sectionVariants}
+          custom={4}
+          initial="hidden"
+          animate="show"
+          viewport={{ once: true }}
+          variants={heroVariants}
+          className="w-full md:w-1/2 mb-8 md:mb-0 flex justify-center items-center h-full"
         >
-          <img src="/hero-illustration.svg" alt="Hero" className="w-full" />
+          <img
+            src={'/Hero2.png'}
+            alt="Learning illustration"
+            className="w-3xl max-w-sm h-full animate-float "
+          />
         </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
 }

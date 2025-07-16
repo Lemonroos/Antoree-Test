@@ -1,68 +1,46 @@
-// import { Row, Col } from 'antd';
-
-// const services = [
-//   {icon: '🎧', title: 'Podcasts', desc: 'Learn on the go'},
-//   {icon: '📝', title: 'Quizzes', desc: 'Test your skills'},
-//   {icon: '💬', title: '1‑on‑1 Tutoring', desc: 'Personalized lessons'},
-// ];
-
-// export default function ServicesSection() {
-//   return (
-//     <section className="py-16 section-services">
-//       <div className="container mx-auto">
-//         <h2 className="text-2xl font-semibold mb-8">Our Services</h2>
-//         <Row gutter={[24, 24]}>
-//           {services.map((svc, i) => (
-//             <Col key={i} xs={24} sm={12} md={8}>
-//               <div className="bg-white p-6 rounded-lg shadow text-center">
-//                 <div className="text-4xl mb-4">{svc.icon}</div>
-//                 <h3 className="font-semibold mb-2">{svc.title}</h3>
-//                 <p>{svc.desc}</p>
-//               </div>
-//             </Col>
-//           ))}
-//         </Row>
-//       </div>
-//     </section>
-//   );
-// }
-
-
-// import React from 'react';
-import { Row, Col } from 'antd';
+import { Card, Col, Row, Typography } from 'antd';
 import { motion } from 'framer-motion';
-import { sectionVariants } from '../../animations/FrameMotVariants';
+import { colVariants, sectionVariants } from '../../animations/VariantContext';
+
+const { Title, Paragraph } = Typography;
 
 const services = [
-  { icon: '🎧', title: 'Podcasts', desc: 'Learn on the go' },
-  { icon: '📝', title: 'Quizzes', desc: 'Test your skills' },
-  { icon: '💬', title: '1‑on‑1 Tutoring', desc: 'Personalized lessons' },
+  { icon: '📚', title: 'E‑Books & Guides', desc: 'Tài liệu toàn diện, học mọi lúc' },
+  { icon: '🗣️', title: 'Live Tutoring', desc: 'Kết nối trực tiếp với giáo viên' },
+  { icon: '🎧', title: 'Podcasts', desc: 'Học tiếng Anh qua âm thanh' },
+  { icon: '📝', title: 'Interactive Quizzes', desc: 'Kiểm tra và củng cố kiến thức' },
 ];
 
 export default function ServicesSection() {
   return (
     <motion.section
-      className="py-16 section-services"
-      initial={'hidden'}
-      whileInView={'showUp'}
-      viewport={{ once: false }}
+      className="section-services bg-white py-16"
+      initial="hidden"
+      whileInView="showUp"
+      viewport={{ once: true }}
       variants={sectionVariants}
     >
-      <div className="container mx-auto">
-        <h2 className="text-2xl font-semibold mb-8">Our Services</h2>
+      <div className="container mx-auto px-4">
+        <Title level={2} className="text-center mb-8">
+          Our Services
+        </Title>
+
         <Row gutter={[24, 24]}>
           {services.map((svc, i) => (
-            <Col key={i} xs={24} sm={12} md={8}>
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 * i + 0.2 }}
-                className="bg-white p-6 rounded-lg shadow text-center"
-              >
-                <div className="text-4xl mb-4">{svc.icon}</div>
-                <h3 className="font-semibold mb-2">{svc.title}</h3>
-                <p>{svc.desc}</p>
+            <Col key={i} xs={24} sm={12} lg={6}>
+              <motion.div custom={i} initial="hidden" viewport={{ once: true }} variants={colVariants} whileInView="show">
+                <Card
+                  hoverable
+                  className="flex flex-col items-center text-center p-6 h-full rounded-lg shadow-sm"
+                >
+                  <div className="text-5xl mb-4">{svc.icon}</div>
+                  <Title level={4} className="mb-2">
+                    {svc.title}
+                  </Title>
+                  <Paragraph className="text-gray-600 mb-0">
+                    {svc.desc}
+                  </Paragraph>
+                </Card>
               </motion.div>
             </Col>
           ))}

@@ -1,68 +1,100 @@
 import { ConfigProvider } from 'antd';
 import { RouterProvider } from 'react-router';
-import './App.css';
 import { rootRouter } from './routers/root';
-function App() {
 
+function App() {
   return (
-    <>
-      {/* <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <Button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </Button>
-        <Button className="mt-4 shadow-lg " draggable>Custom styled button</Button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-       */}
-      <ConfigProvider theme={{
-        components: {
-          Layout: {
-            colorPrimary: '',
-            headerBg: '',
-            footerBg: '',
-            colorText: '',
-          },
-          Menu: {
-            colorText: '',
-            itemBg: '',
-            colorBgBase: '',
-          },
-          Drawer: {
-            colorText: '',
-            // footerPaddingInline:1
-            // size,
-            // itemBg: '',
-            colorBgBase: '',
-          },
-          Carousel: {
-            arrowSize: 40,
-            colorBgContainer: '#001529',
-            colorText: '#803050',
-            // arrowOffset: 400,
-            
-          },
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#16a34a',
+          borderRadius: 6,
+          fontFamily: "'Inter', sans-serif",
+          lineHeight: 1.3,
+          lineHeightHeading3: 1.3,
 
         },
-      }}>
 
-        <RouterProvider router={rootRouter} />
-      </ConfigProvider>
-    </>
-  )
+        components: {
+          Button: {
+            controlHeight: 40,
+            borderRadius: 6,
+          },
+          Input: {
+            controlHeight: 40,
+            borderRadius: 6,
+          },
+          Typography: {
+            // colorText: "#ffffff",
+            // color: "#ffffff",
+            // colorTextBase: "",
+
+          },
+          Select: {
+            controlHeight: 40,
+            borderRadius: 6,
+          },
+
+          // Layout
+          Layout: {
+            colorBgHeader: '#ffffff',
+            colorBgBody: '#f8fafc',
+            colorBgContainer: "#ffffff",
+            colorBgLayout: "#f5f5f5",
+            // colorBgFooter: '#ffffff',
+            // colorText: '#fff',
+            footerBg: "#16a34a",
+          },
+          Menu: {
+            itemBg: '#ffffff',
+            itemActiveBg: '#e6f7ff',
+            itemBorderRadius: 6,
+            colorText: '#1e293b',
+            colorIcon: "#1e293b",
+            colorIconHover: "#16a34a",
+            // colorTextHover: '#16a34a',
+            // colorTextActive: '#ffffff',
+            // itemActiveBg: '#16a34a',
+          },
+          Drawer: {
+            // Chiều cao header, padding
+            // headerHeight: 56,
+            // colorBgHeader: '#16a34a',
+            // colorTitle: '#ffffff',
+            // colorBgBody: '#ffffff',
+            paddingContentVertical: 24,
+            paddingContentHorizontal: 24,
+            colorBgBase: '#000',
+          },
+
+          // Carousel
+          Carousel: {
+            arrowSize: 32,
+            // dotSize: 8,
+            // dotActiveSize: 8,
+            // dotColor: '#cbd5e1',
+            dotActiveWidth: 8,
+            // dotActiveColor: '#16a34a',
+          },
+
+          // Card
+          Card: {
+            borderRadius: 8,
+            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+          },
+
+          // Pagination
+          Pagination: {
+            itemSize: 32,
+            colorText: '#1e293b',
+            colorPrimary: '#16a34a',
+          },
+        },
+      }}
+    >
+      <RouterProvider router={rootRouter} />
+    </ConfigProvider>
+  );
 }
 
-export default App
+export default App;
