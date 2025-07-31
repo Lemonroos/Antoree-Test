@@ -1,7 +1,6 @@
 # Antoree FE Test
 
 A modern front-end interface for an AI-integrated educational e-commerce platform. Users can browse courses, books, and educational materials with intelligent AI-powered recommendations.
-Demo link: https://antoree-test.vercel.app/
 ## ✨ Key Features
 
 - **Product Discovery**: Search, filter, and browse courses/books/documents
